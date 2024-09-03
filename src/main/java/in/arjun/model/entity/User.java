@@ -24,5 +24,5 @@ public class User {
     private String country;
     private String state;
     private String city;
-    private String resetPassword;
+    private String isFirstTimeLogin;
 }

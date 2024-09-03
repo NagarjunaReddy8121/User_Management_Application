@@ -1,23 +1,23 @@
 package in.arjun.controller;
 
+import in.arjun.config.QuoteClient;
 import in.arjun.model.response.QuoteResponse;
-import in.arjun.service.QuoteService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 public class QuoteController {
 
     @Autowired
-    private QuoteService quoteService;
+    private QuoteClient quoteClient;
 
-    @GetMapping("/getQuote")
-    public ResponseEntity<QuoteResponse> getRandomQuote(){
-        QuoteResponse randomQuote = quoteService.getRandomQuote();
-        return new ResponseEntity<>(randomQuote, HttpStatus.OK);
+     @GetMapping("/dashboard")
+     public String getQuote(Model model){
+        QuoteResponse quoteResponse = quoteClient.getQuote();
+        String quote = quoteResponse.getQuote();
+        model.addAttribute("quote",quote);
+        return "dashboard";
     }
 }
