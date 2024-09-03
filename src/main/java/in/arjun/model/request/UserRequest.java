@@ -18,4 +18,5 @@ public class UserRequest {
     private String country;
     private String state;
     private String city;
+    private String password;
 }
